@@ -1,0 +1,34 @@
+﻿CBARQ Data, Final Model Report
+
+
+Problem: Can you predict behaviors based on a dog’s breed?
+Data: CBARQ Behavioral Assessment, data gathered from a survey polling individuals about their dog’s behavior, using a scale of 1-5.
+Model: Supervised Linear Regression
+Preprocessing Steps: 
+* Eliminated rows with more than 5 values missing and imputed the rest with the means of their category; 
+* Imputed outliers in columns which had few outliers with the value of IQR x 2; 
+* Standardized responses for Mixed Breed dogs;
+* Limited dataset to the most common 10 breeds; 
+* Added “1” to all values in all columns to better reflect the original results of the survey;
+* Eliminated heavily negative-biased categories, leaving 5: “energy”, “excitability”, “attachatten” (attachment and attention-seeking behavior), “chasing”, and “trainability”;
+* Examined correlations and differences in aggregated trait values between breeds;
+* Conducted an ANOVA test to determine whether those values were significant enough to be differentiated;
+* Created dummy variables for the “BreedID” category;
+* Separated breeds into the X and traits into y variables;
+* Further split data into training and test sets (70/30);
+* Used a random state of 55 for repeatability.
+Model: 
+* Final data shape:
+   * X: (5629, 10)
+   * y: (5629, 5)
+* Model iterations:
+   * Linear
+   * Lasso
+   * XGBoost
+   * Random Forest Regressor
+* Final model: Linear Regression
+   * The best negative MSE score for the Linear Regression model is -0.7485746361602028
+   * The best parameters are {'copy_X': True, 'fit_intercept': True, 'positive': True}
+   * The model's NMSE training CV score is -0.747773582924948
+   * The model's NMSE testing CV score is -0.7426515099102272
+   * Hyperparameters were determined by a GridSearchCV of 10 iterations
